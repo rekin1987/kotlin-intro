@@ -1,4 +1,4 @@
-package intermediate
+package advanced
 
 fun multithreadingAndroid() {
     // ANKO library for Android only:

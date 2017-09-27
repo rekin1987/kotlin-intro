@@ -1,5 +1,10 @@
 package intermediate
 
+fun forWithRanges(){
+    for (i in 0..10) {/*body*/}
+    for (i in 0..10 step 2) {/*body*/}
+    for (i in 15 downTo 0 step 3) {/*body*/}
+}
 
 // 'Any' is a superclass for every object - like 'Object' in Java
 fun whenExpr(x: Any) {
@@ -16,3 +21,5 @@ fun whenExpr(x: Any) {
         }
     }
 }
+
+

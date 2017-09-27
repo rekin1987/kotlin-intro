@@ -1,5 +1,24 @@
 package intermediate
 
+// aggregate operations:
+// any, all, none, count, forEach, forEachIndexed, max, min
+
+// filtering operations
+// drop, dropWhile, filter, slice, take, takeLast, takeWhile
+
+// mapping operations
+// flatMap, groupBy, map, mapIndexed
+
+// elements operations
+// contains, elementAt, first, last, indexOf
+
+// generation operations
+// merge, partition, plus
+
+// ordering operations
+// reverse, sort, sortBy, sortDescending, sortDescendingBy
+
+
 fun collections1() {
     val arrayInt = listOf(1, 2, 3, 4, 5)
     var arrayStr = listOf("one", "two", "three", "four", "five")

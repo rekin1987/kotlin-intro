@@ -1,4 +1,4 @@
-package intermediate
+package advanced
 
 class APerson(val name: String, val age: Int, val male: Boolean) {
     operator fun component1() = name
