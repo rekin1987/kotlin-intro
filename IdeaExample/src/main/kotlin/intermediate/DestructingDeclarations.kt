@@ -29,3 +29,15 @@ fun returningPerson(): APerson {
 fun testMultipleReturn(){
     val (pName, pAge, pMale) = returningPerson()
 }
+
+
+fun forLoop() {
+    val ints: IntArray = intArrayOf(1, 2, 3)
+    for (item: Int in ints) {
+        // ...
+    }
+
+    for ((index, value) in ints.withIndex()) {
+        println("the element at $index is $value")
+    }
+}

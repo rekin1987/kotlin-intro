@@ -11,3 +11,7 @@ interface Int1 {
 
 interface Int2 {
 }
+
+class MovingSprite: Moveable {
+    override fun move(direction: Direction, byPixels: Int) { /*body*/ }
+}

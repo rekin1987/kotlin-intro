@@ -3,7 +3,6 @@ package basics
 import intermediate.isOdd
 
 fun ifElse() {
-
     val a = 2
     val b = 3
 
@@ -12,22 +11,16 @@ fun ifElse() {
 
     val max = if (a > b) {
         print("Choose a")
-        a
+        a // last sentence is a return value
     } else {
         print("Choose b")
-        b
+        b // last sentence is a return value
     }
 }
 
 fun forLoop() {
     val ints: IntArray = intArrayOf(1, 2, 3)
-    for (item: Int in ints) {
-        // ...
-    }
-
-    for ((index, value) in ints.withIndex()) {
-        println("the element at $index is $value")
-    }
+    for (item in ints) { /*body*/ }
 }
 
 fun whileLoop() {
@@ -35,6 +28,19 @@ fun whileLoop() {
     while (a > 0) {
         //
         a--
+    }
+
+    do {
+        var i = 5
+        /*body*/
+    } while(i-- <= 0)
+}
+
+fun veryBasicSwitchCase(value: Int){
+    when(value){
+        0 -> print("0")
+        1 -> print("1")
+        else -> print("unknown")
     }
 }
 

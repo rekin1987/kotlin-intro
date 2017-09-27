@@ -6,7 +6,9 @@ fun printToConsole() {
     val longPrice = 1_000_000_000L
     val stringItem = "string with int val is $intVal"
 
-    println("print string = $stringItem and long = $longPrice and even float = ${if (floatNum > 10) "large" else "small"}")
+    println(
+     "print string = $stringItem and long = $longPrice and even float = ${if (floatNum > 10) "large" else "small"}"
+    )
 }
 
 fun readFromConsole() {
