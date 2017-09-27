@@ -7,6 +7,42 @@ package intermediate
 //abstract
 //data
 
+private class MyWindow {
+
+    var name = "default window"
+
+    constructor() {
+        // this is secondary constructor, which must call the primary one!
+    }
+
+    constructor(str: String) {
+        // this is primary constructor!
+    }
+
+     inner class Handle {
+        val handleName = "handle for " + name /* OR MyWindow@name */
+        val handleName2 = "handle for " + MyWindow@name
+    }
+
+
+}
+
+private class MyDoor() {
+
+    constructor(str: String) : this() {
+        // this is secondary constructor, which must call the primary one!
+    }
+}
+
+fun creatingWindowAndDoor() {
+    var window = MyWindow()
+    window = MyWindow("Windows XP")
+
+    var door = MyDoor()
+    door = MyDoor("woodden door")
+
+}
+
 
 class A private constructor(private val ii: Int) {
 
