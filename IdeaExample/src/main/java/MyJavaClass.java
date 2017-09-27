@@ -36,6 +36,24 @@ class GitUser {
     private String pass;
     private int colorMode;
 
+    public GitUser() {
+        this("default user", "default pass", 0);
+    }
+
+    public GitUser(String username) {
+        this(username, "default pass", 0);
+    }
+
+    public GitUser(String username, String pass) {
+        this(username, pass, 0);
+    }
+
+    public GitUser(String username, String pass, int colorMode) {
+        this.username = username;
+        this.pass = pass;
+        this.colorMode = colorMode;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -64,9 +82,7 @@ class GitUser {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         GitUser gitUser = (GitUser) o;
-
         if (colorMode != gitUser.colorMode) return false;
         if (!username.equals(gitUser.username)) return false;
         return pass.equals(gitUser.pass);
@@ -82,6 +98,31 @@ class GitUser {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "(" + this.getClass().getSimpleName() +
+                " username = " + username +
+                ", pass = " + pass +
+                ", colorMode = " + colorMode
+                + ")";
     }
-}
+
+    public GitUser copy() {
+        return new GitUser(username, pass, colorMode);
+    }
+
+    public GitUser copy(String username) {
+        return new GitUser(username, this.pass, this.colorMode);
+    }
+
+    public GitUser copy(String username, String pass) {
+        return new GitUser(username, pass, this.colorMode);
+    }
+
+    public GitUser copy(String username, String pass, int colorMode) {
+        return new GitUser(username, pass, colorMode);
+    }
+
+    public String component1(){ return username; }
+    public String component2(){ return pass; }
+    public int component3(){ return colorMode; }
+
+} // end of GitUser class

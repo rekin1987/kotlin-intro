@@ -10,5 +10,5 @@ class KotlinTest {
         assertFalse("Message on assertion failed", { 3==4 })
         assertTrue("Message") { 1 == 1 }
     }
-
 }
+
