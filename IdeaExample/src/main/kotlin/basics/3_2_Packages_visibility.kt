@@ -1,9 +1,6 @@
 package basics
 
-
 private class MyPriv
-
-
 
 class VisClass {
 
@@ -16,7 +13,6 @@ class VisClass {
 
     }
 }
-
 
 fun checkProtected() {
     val vis = VisClass()
