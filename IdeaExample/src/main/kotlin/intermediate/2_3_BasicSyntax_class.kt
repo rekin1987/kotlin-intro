@@ -8,7 +8,6 @@ package intermediate
 //data
 
 private class MyWindow {
-
     var name = "default window"
 
     constructor() {
@@ -23,8 +22,6 @@ private class MyWindow {
         val handleName = "handle for " + name /* OR MyWindow@name */
         val handleName2 = "handle for " + MyWindow@name
     }
-
-
 }
 
 private class MyDoor() {
@@ -49,13 +46,13 @@ class A private constructor(private val ii: Int) {
     private constructor(a: Long) : this(a.toInt()) {
     }
 
-    constructor(a: Int, b: String) : this(a) {
+    constructor(a: Int, b: String) : this(a.toLong()) {
     }
 
 }
 
-class Aaaa1(amount: Int) {
-    var amount = amount
+class Aaaa1(amountParam: Int) {
+    var amount = amountParam
 }
 
 class Aaaa2(var amount: Int) {
