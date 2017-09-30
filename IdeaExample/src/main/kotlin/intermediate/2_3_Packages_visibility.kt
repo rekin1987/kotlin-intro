@@ -1,4 +1,4 @@
-package basics
+package aaa
 
 
 //class MyPrivClass // redeclaration...

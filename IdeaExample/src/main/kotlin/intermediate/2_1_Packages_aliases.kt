@@ -11,8 +11,3 @@ fun myFun() {
     com.example.globalFun() // when using fully qualified name we don't need to import
 }
 
-fun myFun2() = globalFun() // this is NOT a function pointer assignment!
-//this is:
-//fun myFun2() {
-//    globalFun()
-//}

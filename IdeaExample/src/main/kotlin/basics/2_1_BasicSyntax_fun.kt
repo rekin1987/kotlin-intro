@@ -31,3 +31,13 @@ fun testDefaultParams() {
     // note the radius and height are taken as default!
     val myOakTreeType = createTree(type = "Oak")
 }
+
+fun myFun1() {/*body*/}
+
+fun myFun2() = "returning a string"
+
+//fun myFun5() = myFun2() // this is NOT a function pointer assignment!
+//this is
+fun myFun5() {
+    myFun2()
+}
