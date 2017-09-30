@@ -17,7 +17,7 @@ fun whenExpr(x: Any) {
         is String -> print("input is String type")
         is Int -> if (x.isOdd()) print("x is odd") else print("x is even")
         else -> { // Note the block
-            print("x is neither 1 nor 2")
+            print("x is weird")
         }
     }
 }

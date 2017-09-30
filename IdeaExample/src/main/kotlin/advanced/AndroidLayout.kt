@@ -1,4 +1,4 @@
-package intermediate
+package advanced
 
 //odwolanie bezosrednio do layoutu:
 //text_view_id.text = "aaa"

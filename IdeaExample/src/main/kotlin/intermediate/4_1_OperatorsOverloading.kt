@@ -25,8 +25,3 @@ fun testStringMinus(){
     val str = str1 - 1
     str == "String"
 }
-
-fun testCollection(){
-    val list = mutableListOf("one", "two")
-    list += "three"
-}
