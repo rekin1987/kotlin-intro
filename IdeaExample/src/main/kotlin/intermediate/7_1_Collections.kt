@@ -20,35 +20,23 @@ package intermediate
 
 
 fun collections1() {
-    val arrayInt = listOf(1, 2, 3, 4, 5)
-    var arrayStr = listOf("one", "two", "three", "four", "five")
+    val listInt = listOf(1, 2, 3, 4, 5)
+    var listStr = listOf("one", "two", "three", "four", "five")
 
-    arrayInt.forEach { it * 2 /* it +=2 can't assign the value, can print out */ }
-    var doubleArrayInt = arrayInt.map { it * 2 /* can't assign the value */ }
+    listInt.forEach { it * 2 /* it +=2 can't assign the value, can print out */ }
 
-    var boolVal = arrayInt.any { it>3 }
-    boolVal = arrayInt.none { it>3 }
+    var doubleArrayInt = listInt.map { it * 2 /* can't assign the value */ }
 
-    var arrayStr2 = arrayStr.map { it + "aa" }
+    var boolVal = listInt.any { it>3 }
+    boolVal = listInt.none { it>3 }
 
-    arrayStr2.forEach { println(it) }
+    var listStr2 = listStr.map { it + "aa" }
 
-    arrayStr2 = arrayStr.sortedBy { it.length }
+    listStr2 = listStr.sortedBy { it.length }
 
-    arrayStr2.forEach { println(it) }
+    listStr2 = listStr.filter { it.startsWith("f") }
 
-    arrayStr2 = arrayStr.filter { it.startsWith("f") }
-
-    arrayStr2.forEach { println(it) }
-
+    listStr2 = listStr2.mapIndexed { index, str -> str + "_index_$index" }
 }
 
-fun collections2(){
-    val list = listOf("one", "two", "three", "four", "five")
-    var list2 = list.map { it + "aa" }
-
-    list2 = list.mapIndexed { index: Int, s: String ->  s + "_index_$index" }
-    list2 = list.mapIndexed { index, str -> str + "_index_$index" }
-
-}
 

@@ -1,14 +1,15 @@
 package intermediate
 
-fun forWithRanges(){
-    for (i in 0..10) {/*body*/}
-    for (i in 0..10 step 2) {/*body*/}
-    for (i in 15 downTo 0 step 3) {/*body*/}
+fun forWithRanges() {
+    for (i in 0..10) {/*body*/
+    }
+    for (i in 0..10 step 2) {/*body*/
+    }
+    for (i in 15 downTo 0 step 3) {/*body*/
+    }
 }
 
-// 'Any' is a superclass for every object - like 'Object' in Java
 fun whenExpr(x: Any) {
-
     // works like switch, but more extended
     when (x) {
         1 -> print("x == 1")
@@ -22,4 +23,11 @@ fun whenExpr(x: Any) {
     }
 }
 
-
+fun describe(obj: Any): String =
+        when (obj) {
+            1 -> "One"
+            "Hello" -> "Greeting"
+            is Long -> "Long"
+            !is String -> "Not a string"
+            else -> "Unknown"
+        }

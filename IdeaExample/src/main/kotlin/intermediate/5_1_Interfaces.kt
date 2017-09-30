@@ -15,7 +15,7 @@ class Sprite {
     fun stepForward(){ /*body*/ }
 }
 
-interface Moveable {
+interface Movable {
     val sprite:Sprite
 
     fun move(direction: Direction, byPixels: Int){
@@ -28,7 +28,7 @@ interface Moveable {
 }
 
 
-class SpriteUser : Moveable {
+class SpriteUser : Movable {
     override val sprite: Sprite = Sprite()
 }
 
