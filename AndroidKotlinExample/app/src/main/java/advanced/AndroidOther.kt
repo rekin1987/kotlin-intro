@@ -10,11 +10,11 @@ package advanced
 //    toast("aa")
 //}
 
-inline fun onlyReleaseVersion(functionToExecute: () -> Unit) {
-    if (VERSION.contains("release")) {
-        functionToExecute()
-    }
-}
+//inline fun onlyReleaseVersion(functionToExecute: () -> Unit) {
+//    if (VERSION.contains("release")) {
+//        functionToExecute()
+//    }
+//}
 
 //    val textView = TextView(context).apply {
 //        text = "Hello"
