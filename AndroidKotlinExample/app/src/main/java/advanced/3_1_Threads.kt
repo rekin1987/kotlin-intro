@@ -1,5 +1,11 @@
 package advanced
 
+//build.gradle:
+//compile "org.jetbrains.anko:anko-coroutines:$anko_version"
+// gradle.properties - because experimental
+//kotlin.coroutines=enable
+
+
 fun multithreadingAndroid() {
     // ANKO library for Android only:
 //    doAsync {

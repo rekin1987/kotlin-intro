@@ -32,7 +32,7 @@ class SomeApp(val data: String) {
 
     var positiveInt: Int by PositiveIntDelegate()
 
-    fun testPositiveInt(){
+    fun testPositiveInt() {
 
         // println("positiveInt = $positiveInt") // exception
 
@@ -49,13 +49,30 @@ class PositiveIntDelegate {
 
     private var backingIntField: Int? = null
 
-    operator fun getValue(thisRef: Any?, property: KProperty<*>) : Int {
+    operator fun getValue(thisRef: Any?, property: KProperty<*>): Int {
         return backingIntField?.let { backingIntField!! } ?: throw IllegalArgumentException("My backing field is not initialized")
     }
 
-    operator fun setValue(thisRef:  Any?, property: KProperty<*>, value: Int){
-        if(value > 0){
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: Int) {
+        if (value > 0) {
             backingIntField = value
         }
     }
 }
+
+val p = Pair("a", 1)
+val p2 = "b" to 2
+
+class Config(map: Map<String, Any>) {
+    val width: Int by map
+    val height: Int by map
+    val name: String by map
+}
+
+val conf = Config(
+        mapOf(
+                "width" to 100, // same as Pair("width", 100)
+                "height" to 50, // same as Pair("height", 50)
+                "name" to "aName" // same as Pair("name", "aName")
+        )
+)
