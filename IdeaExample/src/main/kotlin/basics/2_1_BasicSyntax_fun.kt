@@ -41,3 +41,21 @@ fun myFun2() = "returning a string"
 fun myFun5() {
     myFun2()
 }
+
+//// function 'pointers' example
+fun function1(x: Int) {
+    println("val=$x")
+}
+
+val function2 = ::function1 // KProperty< KFunction <Int, Unit> >
+
+fun function3(aFunction: (Int) -> Unit) {
+    aFunction.invoke(5)
+}
+
+fun abbbb(){
+    function1(1)
+    function2(5)
+    function3(::function1)
+    //function3(::function2) // does not compile
+}
