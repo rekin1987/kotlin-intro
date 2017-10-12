@@ -30,6 +30,8 @@ fun createTree(radius: Int = 2, height: Int = 7, type: String = "Pine") : String
 fun testDefaultParams() {
     // note the radius and height are taken as default!
     val myOakTreeType = createTree(type = "Oak")
+    // can use different order when naming parameters!
+    val myOakTreeType2 = createTree(15, type = "OldOak", height = 2)
 }
 
 fun myFun1() {/*body*/}
