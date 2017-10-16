@@ -28,7 +28,9 @@ fun useLambdaAsAnimClass() {
     })
 
     // method 2
-    view.setOnClickListener({ view -> toast("clicked!") })
+    view.setOnClickListener({ myView -> toast("clicked!" + myView.toString()) })
+
+    view.setOnClickListener({ toast("clicked!" + it.toString()) })
 
     view.setOnClickListener({ toast("clicked!") })
 
