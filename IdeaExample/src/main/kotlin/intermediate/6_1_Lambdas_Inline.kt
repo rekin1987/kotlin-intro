@@ -8,6 +8,19 @@ inline just puts the implementation in place of call
 not inline will create temp object with a function in place of call
 */
 
+
+fun f1(functionToExecute: () -> Unit) {/*body*/}
+
+fun f2(functionToExecute: (String, String, Int) -> Double) {/*body*/}
+
+fun useFuns(){
+
+    f1 { print("lambda1") }
+
+    f2 { s1, s2, i -> 3.14 }
+}
+
+
 inline fun onlyReleaseVersion(functionToExecute: () -> Unit) {
     if (VERSION.contains("release")) {
         functionToExecute()
