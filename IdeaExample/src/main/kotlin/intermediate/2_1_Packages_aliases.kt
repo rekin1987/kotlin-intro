@@ -9,5 +9,6 @@ fun myFun() {
     globalFun()
     gf2()
     com.example.globalFun() // when using fully qualified name we don't need to import
+    // globalFun2() // function is not visible by name - must use alias!
 }
 

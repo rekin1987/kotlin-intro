@@ -1,6 +1,5 @@
 package intermediate
 
-import java.io.File
 import java.io.IOException
 
 // no checked exceptions!

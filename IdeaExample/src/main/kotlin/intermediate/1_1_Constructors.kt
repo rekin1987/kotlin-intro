@@ -81,3 +81,11 @@ fun testClassE() {
     ClassE.name // aaa
     ClassE.B.name // bbb
 }
+
+abstract class AbsClass{
+    abstract fun absFun();
+
+    fun normalFun(){
+
+    }
+}
