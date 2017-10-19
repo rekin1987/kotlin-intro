@@ -49,6 +49,17 @@ class Aaaa1(amountParam: Int) {
 class Aaaa2(var amount: Int) {
 }
 
+class Ccc(amount: Int) {
+
+    val internalAmount: Int
+
+    init {
+        // this is body for primary constructor
+        // properties can be assigned here
+        internalAmount = amount // parameters from primary constructor are visible here
+    }
+}
+
 class A private constructor(private val ii: Int) {
 
     private constructor(a: String) : this(a.toInt()) {
