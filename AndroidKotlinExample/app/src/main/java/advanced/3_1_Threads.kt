@@ -1,5 +1,7 @@
 package advanced
 
+import kotlinx.coroutines.experimental.*
+
 //build.gradle:
 //compile "org.jetbrains.anko:anko-coroutines:$anko_version"
 // gradle.properties - because experimental
@@ -24,3 +26,60 @@ fun coroutinesGeneral() {
 //    }
 }
 
+
+var now = 0L
+
+fun main(args: Array<String>) {
+    myPrint("Running Kotlin")
+    now = System.currentTimeMillis()
+
+    val v1: Deferred<String> = async(CommonPool) {
+        bgTask()
+    }
+
+    myPrint("2")
+    Thread.sleep(3000)
+
+    runBlocking {
+        myPrint("run blocking")
+        val s = v1.await()
+        myPrint("deferred = $s")
+    }
+    myPrint("3")
+
+    // Start a coroutine
+    launch(CommonPool) {
+        myPrint("start coroutine")
+        delay(1000)
+        myPrint("Hello")
+    }
+    myPrint("4")
+
+    Thread.sleep(4000) // wait for 2 seconds
+    myPrint("Stop")
+
+}
+
+fun bgTask(): String  {
+    myPrint(">>bgTask()")
+    Thread.sleep(2000)
+    myPrint("<<bgTask()")
+    return "aa"
+}
+
+fun myPrint(msg: String){
+    println("${System.currentTimeMillis()-now} - $msg")
+}
+
+//EXECUTE:
+//1508442541678 - Running Kotlin
+//55 - 2
+//56 - >>bgTask()
+//2056 - <<bgTask()
+//3069 - run blocking
+//3070 - deferred = aa
+//3070 - 3
+//3072 - 4
+//3072 - start coroutine
+//4083 - Hello
+//7072 - Stop
