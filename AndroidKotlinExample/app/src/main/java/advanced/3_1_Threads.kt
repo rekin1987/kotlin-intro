@@ -26,6 +26,13 @@ fun coroutinesGeneral() {
 //    }
 }
 
+//fun readDb2() {
+//    async(UI) {
+//        val v1: Deferred<String> = bg { DatabaseSingleton.readEntries() }
+////            itemsListView.text = v1.await()
+//    }
+//}
+
 
 var now = 0L
 

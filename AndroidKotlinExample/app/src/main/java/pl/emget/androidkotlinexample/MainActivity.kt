@@ -1,10 +1,9 @@
 package pl.emget.androidkotlinexample
 
-import android.graphics.drawable.Drawable
-import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.experimental.Deferred
@@ -14,8 +13,16 @@ import org.jetbrains.anko.coroutines.experimental.bg
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
+import pl.emget.androidkotlinexample.additions.aboveLollipop
+import pl.emget.androidkotlinexample.additions.readApiLevel
+import pl.emget.androidkotlinexample.additions.readApiName
+import pl.emget.androidkotlinexample.components.PeopleAdapter
+import pl.emget.androidkotlinexample.database.DatabaseSingleton
+import pl.emget.androidkotlinexample.model.JavaPerson
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var people: MutableList<JavaPerson>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,50 +33,58 @@ class MainActivity : AppCompatActivity() {
         }
         titleLabel.text = "Events app"
 
-        atLeastLollipop {
-            toast("Running Lollipop")
-            val drawable: Drawable
-            // unfortunately we still need this 'if' in order to avoid compilation error
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                drawable = getDrawable(android.R.drawable.btn_plus)
-            } else {
-                drawable = applicationContext.resources.getDrawable(android.R.drawable.btn_plus)
-            }
-            val button = FloatingActionButton(this)
+        buttonSave.setOnClickListener { saveToDb() }
+        buttonAdd.setOnClickListener { showAddPersonDialog() }
 
-            button.apply {
-                setImageDrawable(drawable)
+        aboveLollipop {
+            toast("Running Android above Lollipop")
+            val floatingButton = FloatingActionButton(this)
+            floatingButton.apply {
                 size = FloatingActionButton.SIZE_NORMAL
+                setOnClickListener { showAddPersonDialog() }
             }
-
-            insertPoint.addView(button)
-
+            // add floating button
+            insertPoint.addView(floatingButton)
+            // hide casual "add" button
             buttonAdd.visibility = View.GONE
         }
 
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
-//        readDb()
-        readDb2()
+        readDb()
+    }
+
+    fun showAddPersonDialog() {
+        toast("showAddPersonDialog()")
+    }
+
+    fun saveToDb() {
+        toast("saveToDb()")
     }
 
     fun readDb() {
         doAsync {
             // do in background
-            val entries = DatabaseSingleton.readEntries()
+            people = DatabaseSingleton.readEntries()
             uiThread {
+                recyclerView.adapter = PeopleAdapter(people) {
+                    toast(it.name)
+                }
+                //toast(people.toString())
                 // do on UI thread
-                itemsListView.text = entries
+                //recyclerView.adapter.notifyDataSetChanged()
             }
         }
+
+//        async(UI) {
+//            val items: Deferred<MutableList<JavaPerson>> = bg { DatabaseSingleton.readEntries() }
+//            people = items.await()
+//            recyclerView.adapter = PeopleAdapter(people) {
+//                toast(it.name)
+//            }
+//        }
     }
 
-    fun readDb2() {
-        // need experimental feature added in gradle.build
-        async(UI) {
-            val v1: Deferred<String> = bg { DatabaseSingleton.readEntries() }
-            itemsListView.text = v1.await()
-        }
-    }
 
 }
 
