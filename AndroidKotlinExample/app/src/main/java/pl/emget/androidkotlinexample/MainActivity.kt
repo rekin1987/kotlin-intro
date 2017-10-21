@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun readDb2() {
-        async(UI) {
+        async(UI) { // constant 'UI' from ANKO library refers to Android main UI thread
             val items: Deferred<MutableList<JavaPerson>> = bg { DatabaseSingleton.readEntries() }
             people = items.await()
             recyclerView.adapter = PeopleAdapter(people) {
