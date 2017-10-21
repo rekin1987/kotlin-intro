@@ -4,43 +4,40 @@ import java.lang.IllegalArgumentException
 import kotlin.properties.Delegates
 import kotlin.reflect.KProperty
 
-// by lazy
-// lateinit
-// own delegate
 
-class MyDatabase() {
-    constructor(str: String) : this() {
-        // init DB from string
-    }
-}
+class MyDatabase(val name: String)
 
 class SomeApp(val data: String) {
-    //    val database = MyDatabase("init")
+
     val database: MyDatabase by lazy { MyDatabase("init") }
+    // similar to: val database = MyDatabase("init")
+
     lateinit var myString: String
         private set
 
     fun doSomething() {
-        val strLen = myString.length // exception not initialized but used
+        val strLen = myString.length // exception 'not initialized but used'
     }
 
     // will be greater or equal zero
     val dateInMillis: Long by Delegates.vetoable(0L) { _, _, incomingVal ->
-        println("inside lambda")
         incomingVal >= 0
+    }
+
+    val itemsCount: Int by Delegates.observable(0) { _, oldVal, newVal ->
+        println("itemsCount value changed from $oldVal to $newVal")
     }
 
     var positiveInt: Int by PositiveIntDelegate()
 
     fun testPositiveInt() {
-
         // println("positiveInt = $positiveInt") // exception
 
         positiveInt = 14
-        println("positiveInt = $positiveInt")
+        println("positiveInt = $positiveInt") // 14
 
         positiveInt = -12
-        println("positiveInt = $positiveInt")
+        println("positiveInt = $positiveInt") // still 14
     }
 
 }
@@ -59,9 +56,6 @@ class PositiveIntDelegate {
         }
     }
 }
-
-val p = Pair("a", 1)
-val p2 = "b" to 2
 
 class Config(map: Map<String, Any>) {
     val width: Int by map

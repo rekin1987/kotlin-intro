@@ -1,6 +1,6 @@
 package advanced
 
-class Person {
+private class Person {
 
     var name: String = ""
         get() = field.toLowerCase()
@@ -9,5 +9,7 @@ class Person {
         }
 
     var age: Int? = null
-        private set
+        private set // protected/internal as well
+
+
 }

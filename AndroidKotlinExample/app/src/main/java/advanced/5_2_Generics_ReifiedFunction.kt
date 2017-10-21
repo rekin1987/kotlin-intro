@@ -9,7 +9,9 @@ class Intent <T> (context: Context, clazz: Class<T>){
     fun putExtra(key: String, value: String){ /*body*/ }
 }
 
-fun <K> genericFun11(param: K) {/*body*/}
+inline fun <K> genericFun11(param: K) {
+//    K::class.java // does not compile
+}
 
 inline fun <reified K> genericFun22(param: K) {
     K::class.java

@@ -63,26 +63,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun readDb() {
-        doAsync {
-            // do in background
+        doAsync {  // runs in background
             people = DatabaseSingleton.readEntries()
-            uiThread {
+            uiThread { // runs on UI thread
                 recyclerView.adapter = PeopleAdapter(people) {
                     toast(it.name)
                 }
-                //toast(people.toString())
-                // do on UI thread
-                //recyclerView.adapter.notifyDataSetChanged()
             }
         }
+    }
 
-//        async(UI) {
-//            val items: Deferred<MutableList<JavaPerson>> = bg { DatabaseSingleton.readEntries() }
-//            people = items.await()
-//            recyclerView.adapter = PeopleAdapter(people) {
-//                toast(it.name)
-//            }
-//        }
+    fun readDb2() {
+        async(UI) {
+            val items: Deferred<MutableList<JavaPerson>> = bg { DatabaseSingleton.readEntries() }
+            people = items.await()
+            recyclerView.adapter = PeopleAdapter(people) {
+                toast(it.name)
+            }
+        }
     }
 
 
