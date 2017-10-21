@@ -5,7 +5,7 @@ import kotlinx.coroutines.experimental.*
 
 val now = System.currentTimeMillis()
 
-fun corTest(){
+fun corTest() {
     val v1: Deferred<String> = async { bgTask() }
 
     myPrint("2")
@@ -30,14 +30,27 @@ fun corTest(){
     myPrint("Stop")
 }
 
+fun corTest2() {
+    myPrint("corTest2")
+    runBlocking {
+        myPrint("runBlocking")
+        delay(1000)
+        myPrint("runBlocking END")
+    }
+    myPrint("2")
 
-fun bgTask(): String  {
+    Thread.sleep(2000)
+    myPrint("finished")
+}
+
+
+fun bgTask(): String {
     myPrint(">>bgTask()")
     Thread.sleep(2000)
     myPrint("<<bgTask()")
     return "aa"
 }
 
-fun myPrint(msg: String){
-    println("${System.currentTimeMillis()-now} - $msg")
+fun myPrint(msg: String) {
+    println("${System.currentTimeMillis() - now} - $msg")
 }
