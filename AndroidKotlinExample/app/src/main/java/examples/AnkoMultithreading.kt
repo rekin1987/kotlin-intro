@@ -26,14 +26,14 @@ class AnkoMultithreading {
 
     fun fetchData2(context: Context) {
         async(UI) {
-            // constant 'UI' from ANKO library refers to Android main UI thread
             // runs on UI thread
+            // constant 'UI' from ANKO library refers to Android main UI thread
             val filesListFuture: Deferred<String> = bg {
                 // runs in background
                 // last line is return
                 fetchFilesListJson()
             }
-            val filesList = filesListFuture.await()
+            val filesList = filesListFuture.await() // does NOT block UI thread!!!
             context.toast("Downloaded list: $filesList")
         }
     }
@@ -41,18 +41,21 @@ class AnkoMultithreading {
     fun fetchData3(context: Context) {
         async(CommonPool) {
             // runs in background
-            val filesListFuture: Deferred<String> = bg {
-                // last line is return
-                fetchFilesListJson()
-            }
-            val filesList = filesListFuture.await()
+            val filesList = fetchFilesListJson()
 
-            launch(UI) { // constant 'UI' from ANKO library refers to Android main UI thread
+            launch(UI) {
+                // constant 'UI' from ANKO library refers to Android main UI thread
                 // runs on UI thread
                 context.toast("Downloaded list: $filesList")
             }
         }
     }
 
-    fun fetchFilesListJson() = "mockup"
+    fun fetchFilesListJson(): String {
+        Thread.sleep(15000)
+        return "mockup"
+    }
+
 }
+
+
