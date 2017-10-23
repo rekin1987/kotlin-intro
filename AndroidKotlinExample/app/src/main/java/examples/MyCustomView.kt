@@ -1,4 +1,4 @@
-package pl.emget.androidkotlinexample.model
+package examples
 
 import android.view.View
 

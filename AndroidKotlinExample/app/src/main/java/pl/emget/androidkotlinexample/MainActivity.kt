@@ -6,23 +6,15 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.experimental.Deferred
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.async
-import org.jetbrains.anko.coroutines.experimental.bg
-import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
-import org.jetbrains.anko.uiThread
 import pl.emget.androidkotlinexample.additions.aboveLollipop
 import pl.emget.androidkotlinexample.additions.readApiLevel
 import pl.emget.androidkotlinexample.additions.readApiName
-import pl.emget.androidkotlinexample.components.PeopleAdapter
-import pl.emget.androidkotlinexample.database.DatabaseSingleton
-import pl.emget.androidkotlinexample.model.JavaPerson
+import pl.emget.androidkotlinexample.model.Event
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var people: MutableList<JavaPerson>
+    private lateinit var events: MutableList<Event>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,24 +55,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun readDb() {
-        doAsync {  // runs in background
-            people = DatabaseSingleton.readEntries()
-            uiThread { // runs on UI thread
-                recyclerView.adapter = PeopleAdapter(people) {
-                    toast(it.name)
-                }
-            }
-        }
+//        doAsync {  // runs in background
+//            people = DatabaseSingleton.readEntries()
+//            uiThread { // runs on UI thread
+//                recyclerView.adapter = PeopleAdapter(people) {
+//                    toast(it.name)
+//                }
+//            }
+//        }
     }
 
     fun readDb2() {
-        async(UI) { // constant 'UI' from ANKO library refers to Android main UI thread
-            val items: Deferred<MutableList<JavaPerson>> = bg { DatabaseSingleton.readEntries() }
-            people = items.await()
-            recyclerView.adapter = PeopleAdapter(people) {
-                toast(it.name)
-            }
-        }
+//        async(UI) { // constant 'UI' from ANKO library refers to Android main UI thread
+//            val items: Deferred<MutableList<Event>> = bg { DatabaseSingleton.readEntries() }
+//            people = items.await()
+//            recyclerView.adapter = PeopleAdapter(people) {
+//                toast(it.name)
+//            }
+//        }
     }
 
 

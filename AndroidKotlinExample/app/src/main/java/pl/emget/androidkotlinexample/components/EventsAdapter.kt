@@ -7,13 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.recycler_view_item.view.*
 import pl.emget.androidkotlinexample.R
-import pl.emget.androidkotlinexample.model.Developer
-import pl.emget.androidkotlinexample.model.JavaPerson
-import pl.emget.androidkotlinexample.model.Tester
+import pl.emget.androidkotlinexample.model.*
 
-class PeopleAdapter(private val peopleList: List<JavaPerson>,
-                    private val itemClick: (JavaPerson) -> Unit) :
-        RecyclerView.Adapter<PeopleAdapter.ViewHolder>() {
+class EventsAdapter(private val eventsList: List<Event>,
+                    private val itemClick: (Event) -> Unit) :
+        RecyclerView.Adapter<EventsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.recycler_view_item, parent, false)
@@ -21,22 +19,22 @@ class PeopleAdapter(private val peopleList: List<JavaPerson>,
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindView(peopleList[position])
+        holder.bindView(eventsList[position])
     }
 
-    override fun getItemCount() = peopleList.size
+    override fun getItemCount() = eventsList.size
 
-    class ViewHolder(view: View, private val itemClick: (JavaPerson) -> Unit)
+    class ViewHolder(view: View, private val itemClick: (Event) -> Unit)
         : RecyclerView.ViewHolder(view) {
 
-        fun bindView(person: JavaPerson) {
+        fun bindView(person: Event) {
             with(person) {
                 itemView.title.text = when (this) {
-                    is Developer -> "DEV"
-                    is Tester -> "TEST"
+                    is CinemaEvent -> "CINEMA"
+                    is TheaterEvent -> "THEATER"
                     else -> "N/A"
                 }
-                itemView.name.text = name
+                itemView.name.text = title
                 itemView.setOnClickListener { itemClick(this) }
             }
         }
