@@ -4,6 +4,7 @@ public abstract class Event {
 
     private String title;
     private long time;
+    private String data;
 
     public String getTitle() {
         return title;
@@ -19,5 +20,13 @@ public abstract class Event {
 
     public void setTime(long time) {
         this.time = time;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
 }
