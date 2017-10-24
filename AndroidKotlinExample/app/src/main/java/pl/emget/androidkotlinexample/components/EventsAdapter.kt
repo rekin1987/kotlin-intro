@@ -11,7 +11,7 @@ import pl.emget.androidkotlinexample.model.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class EventsAdapter(private val eventsList: List<Event>,
+internal class EventsAdapter(private val eventsList: List<Event>,
                     private val itemClick: (Event) -> Unit) :
         RecyclerView.Adapter<EventsAdapter.ViewHolder>() {
 
@@ -26,13 +26,17 @@ class EventsAdapter(private val eventsList: List<Event>,
 
     override fun getItemCount() = eventsList.size
 
-    class ViewHolder(view: View, private val itemClick: (Event) -> Unit)
+    internal class ViewHolder(view: View, private val itemClick: (Event) -> Unit)
         : RecyclerView.ViewHolder(view) {
 
-        fun bindView(person: Event) {
-            with(person) lambda@ {
+        fun bindView(ev: Event) {
+            /**
+             * On purpose this is overcomplicated by using two levels of "with"
+             * - but it allows to show what labels are for
+             */
+            with(ev) lambda@ { // label to allow referring to Event
                 with(itemView) {
-                    title.text = when (this@lambda) {
+                    title.text = when (this@lambda) { // this@lambda refers to Event
                         is CinemaEvent -> "CINEMA (${this@lambda.freeSpots})"
                         is TheaterEvent -> "THEATER (${if (this@lambda.formalOutfitRequired) "formal" else " casual"})"
                         else -> "N/A"

@@ -6,9 +6,9 @@ import pl.emget.androidkotlinexample.model.Event
 import pl.emget.androidkotlinexample.model.TheaterEvent
 import java.net.URL
 
-class WebManager {
+internal class WebManager {
 
-    companion object {
+    private companion object {
         val CINEMA_EVENTS_LIST_URL = "http://emget.pl/temp/cinema_events_list.json"
         val THEATER_EVENTS_LIST_URL = "http://emget.pl/temp/theater_events_list.json"
     }

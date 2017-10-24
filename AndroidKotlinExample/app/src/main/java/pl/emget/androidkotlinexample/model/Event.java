@@ -1,6 +1,6 @@
 package pl.emget.androidkotlinexample.model;
 
-public abstract class Event {
+public abstract class Event { // this is Java class
 
     private String title;
     private long time;

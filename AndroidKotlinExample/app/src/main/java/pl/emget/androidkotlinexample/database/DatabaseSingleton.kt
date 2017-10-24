@@ -7,17 +7,16 @@ import pl.emget.androidkotlinexample.App
 import pl.emget.androidkotlinexample.model.CinemaEvent
 import pl.emget.androidkotlinexample.model.Event
 import pl.emget.androidkotlinexample.model.TheaterEvent
-import java.util.*
 
 
-class DatabaseSingleton private constructor(context: Context = App.instance) : ManagedSQLiteOpenHelper(context, DB_NAME) {
+internal class DatabaseSingleton private constructor(context: Context = App.instance) : ManagedSQLiteOpenHelper(context, DB_NAME) {
 
-    companion object {
+    internal companion object {
         val DB_NAME = "Events.db"
         val EVENTS_TABLE_NAME = "Events"
         val EVENT_TYPE_CINEMA = "C"
         val EVENT_TYPE_THEATER = "T"
-        val instance by lazy { DatabaseSingleton() }
+        val instance by lazy { DatabaseSingleton() } // lazy init, only when it is used
     }
 
     override fun onCreate(db: SQLiteDatabase) {
@@ -35,7 +34,7 @@ class DatabaseSingleton private constructor(context: Context = App.instance) : M
     }
 
     fun readEntries(): MutableList<Event> {
-        return selectAll().toMutableList()
+        return selectAll().toMutableList() // List -> MutableList
     }
 
     fun storeList(events: MutableList<Event>) {
@@ -44,7 +43,7 @@ class DatabaseSingleton private constructor(context: Context = App.instance) : M
 
     fun clear() {
         instance.use {
-            delete(EVENTS_TABLE_NAME) // NOT dropTable!
+            delete(EVENTS_TABLE_NAME) // NOT dropTable()
         }
     }
 

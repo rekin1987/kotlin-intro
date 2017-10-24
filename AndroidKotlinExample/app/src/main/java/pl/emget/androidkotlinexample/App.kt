@@ -2,9 +2,9 @@ package pl.emget.androidkotlinexample
 
 import android.app.Application
 
-class App : Application() {
+internal class App : Application() {
 
-    companion object {
+    internal companion object {
         lateinit var instance: App
             private set
     }

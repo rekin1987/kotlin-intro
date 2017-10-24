@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
         buttonDb.apply {
             setOnClickListener { readDb() }
-            setOnLongClickListener { clearDb(); true }
+            setOnLongClickListener { clearDb(); /*return*/ true  }
         }
         buttonWww.setOnClickListener { readWeb() }
 
@@ -48,14 +48,15 @@ class MainActivity : AppCompatActivity() {
         }
 
         with(recyclerView) {
-            layoutManager = LinearLayoutManager(this@MainActivity)
+            layoutManager = LinearLayoutManager(this@MainActivity) // this refers to RecyclerView, to access MainActivity we use label '@"
+            // divider between row in RecyclerView
+            // (layoutManager as LinearLayoutManager) - because smart cast is not possible on VAR!
             addItemDecoration(DividerItemDecoration(context, (layoutManager as LinearLayoutManager).orientation))
         }
     }
 
     private fun readDb() {
-        doAsync {
-            // runs in background
+        doAsync { // runs in background
             val ctx: Context = this@MainActivity // access to outer class instance if needed
             val localEvents = DatabaseSingleton.instance.readEntries()
             uiThread {
@@ -66,8 +67,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun clearDb() {
-        doAsync {
-            // runs in background
+        doAsync { // runs in background
+            // if this throws Exception app don't crash, because we are running in ExecutorService
+            // same if we run in a coroutine
+            // but app crashes in other cases!
             DatabaseSingleton.instance.clear()
             uiThread {
                 // runs on UI thread
@@ -79,7 +82,7 @@ class MainActivity : AppCompatActivity() {
     private fun readWeb() {
         async(UI) {
             val items: Deferred<MutableList<Event>> = bg { WebManager().fetchEventsFromWeb() }
-            val localEvents = items.await() // does not bloc UI thread
+            val localEvents = items.await() // does not block UI thread
             refreshList(localEvents)
         }
     }
@@ -99,7 +102,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun clickedItem(event: Event) {
-        alert {
+        alert { // creating alert dialog is so simple
             title = "Store ${event.title} do DB?"
             positiveButton("Add") { DatabaseSingleton.instance.addEntry(event) }
             negativeButton("Cancel") { it.dismiss() } // 'it' refers to DialogInterface

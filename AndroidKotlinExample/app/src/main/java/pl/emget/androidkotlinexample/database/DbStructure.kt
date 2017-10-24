@@ -1,7 +1,7 @@
 package pl.emget.androidkotlinexample.database
 
 
-object EventsTable {
+internal object EventsTable {
     val ID = "_id" // int
     val TITLE = "title" // text
     val TIME = "time" // int

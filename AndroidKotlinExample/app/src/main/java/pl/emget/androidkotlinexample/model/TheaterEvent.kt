@@ -1,4 +1,3 @@
 package pl.emget.androidkotlinexample.model
 
-class TheaterEvent(var formalOutfitRequired: Boolean = false) : Event() {
-}
+internal class TheaterEvent(var formalOutfitRequired: Boolean = false) : Event() //extend Java class
