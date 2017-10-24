@@ -2,16 +2,18 @@ package pl.emget.androidkotlinexample
 
 import android.content.Context
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
-import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.experimental.Deferred
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
-import org.jetbrains.anko.*
+import org.jetbrains.anko.alert
 import org.jetbrains.anko.coroutines.experimental.bg
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.toast
+import org.jetbrains.anko.uiThread
 import pl.emget.androidkotlinexample.additions.aboveLollipop
 import pl.emget.androidkotlinexample.additions.readApiLevel
 import pl.emget.androidkotlinexample.additions.readApiName
@@ -35,24 +37,17 @@ class MainActivity : AppCompatActivity() {
         }
         titleLabel.text = "Events app"
 
-        buttonSave.setOnClickListener { readDb() }
-        buttonAdd.setOnClickListener { readWeb() }
+        buttonDb.setOnClickListener { readDb() }
+        buttonWww.setOnClickListener { readWeb() }
 
         aboveLollipop {
             toast("Running Android above Lollipop") // shorthand for showing Toast
-            val floatingButton = FloatingActionButton(this)
-            floatingButton.apply {
-                size = FloatingActionButton.SIZE_NORMAL
-                setImageResource(R.drawable.www_icon)
-                setOnClickListener { readWeb() }
-            }
-            // add floating button
-            insertPoint.addView(floatingButton)
-            // hide casual "add" button
-            buttonAdd.visibility = View.GONE
         }
 
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        with(recyclerView){
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            addItemDecoration(DividerItemDecoration(context, (layoutManager as LinearLayoutManager).orientation))
+        }
     }
 
     private fun readDb() {
@@ -67,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun readWeb(){
+    private fun readWeb() {
         async(UI) {
             val items: Deferred<MutableList<Event>> = bg { WebManager().fetchEventsFromWeb() }
             val localEvents = items.await() // does not bloc UI thread
@@ -89,7 +84,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun clickedItem(event: Event){
+    private fun clickedItem(event: Event) {
         alert {
             title = "Store ${event.title} do DB?"
             positiveButton("Add") { DatabaseSingleton.instance.addEntry(event) }

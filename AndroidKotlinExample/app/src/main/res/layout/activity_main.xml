@@ -32,25 +32,25 @@
         app:layout_constraintTop_toBottomOf="@+id/apiLabel" />
 
     <Button
-        android:id="@+id/buttonSave"
+        android:id="@+id/buttonDb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="24dp"
         android:layout_weight="1"
-        android:text="Save"
+        android:text="Read DB"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleLabel"
         android:layout_marginRight="16dp" />
 
     <Button
-        android:id="@+id/buttonAdd"
+        android:id="@+id/buttonWww"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:layout_weight="1"
-        android:text="Add"
+        android:text="Read WWW"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleLabel"
         android:layout_marginLeft="8dp" />
@@ -79,6 +79,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSave" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonWww" />
 
 </android.support.constraint.ConstraintLayout>
