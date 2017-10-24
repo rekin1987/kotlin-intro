@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.recycler_view_item.view.*
 import pl.emget.androidkotlinexample.R
 import pl.emget.androidkotlinexample.model.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class EventsAdapter(private val eventsList: List<Event>,
                     private val itemClick: (Event) -> Unit) :
@@ -28,14 +30,19 @@ class EventsAdapter(private val eventsList: List<Event>,
         : RecyclerView.ViewHolder(view) {
 
         fun bindView(person: Event) {
-            with(person) {
-                itemView.title.text = when (this) {
-                    is CinemaEvent -> "CINEMA"
-                    is TheaterEvent -> "THEATER"
-                    else -> "N/A"
+            with(person) lambda@ {
+                with(itemView) {
+                    title.text = when (this@lambda) {
+                        is CinemaEvent -> "CINEMA (${this@lambda.freeSpots})"
+                        is TheaterEvent -> "THEATER (${if (this@lambda.formalOutfitRequired) "formal" else " casual"})"
+                        else -> "N/A"
+                    }
+
+                    val formattedDate = SimpleDateFormat("dd/MM HH:mm").format(Date(this@lambda.time))
+                    val desc = "${this@lambda.title} : $formattedDate : ${this@lambda.data}"
+                    name.text = desc
+                    setOnClickListener { itemClick(this@lambda) }
                 }
-                itemView.name.text = title
-                itemView.setOnClickListener { itemClick(this) }
             }
         }
     }
