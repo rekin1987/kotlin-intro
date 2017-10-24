@@ -19,6 +19,8 @@ class SomeApp(val data: String) {
         val strLen = myString.length // exception 'not initialized but used'
     }
 
+    val myInt by Delegates.notNull<Int>()
+
     // will be greater or equal zero
     val dateInMillis: Long by Delegates.vetoable(0L) { _, _, incomingVal ->
         incomingVal >= 0
