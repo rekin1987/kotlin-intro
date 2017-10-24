@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity() {
             events = collection
             recyclerView.adapter = EventsAdapter(events) {
                 // on click
-                clickedItem(it) // 'it' inside lambda
+                clickedItem(it) // 'it' inside lambda refers to Event
             }
         } else {
             events.clear()
