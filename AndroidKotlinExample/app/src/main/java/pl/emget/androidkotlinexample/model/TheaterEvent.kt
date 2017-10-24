@@ -1,4 +1,4 @@
 package pl.emget.androidkotlinexample.model
 
-class TheaterEvent(val formalOutfitRequired: Boolean) : Event() {
+class TheaterEvent(var formalOutfitRequired: Boolean = false) : Event() {
 }
