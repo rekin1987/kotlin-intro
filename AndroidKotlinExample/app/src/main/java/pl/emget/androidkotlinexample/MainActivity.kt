@@ -37,14 +37,17 @@ class MainActivity : AppCompatActivity() {
         }
         titleLabel.text = "Events app"
 
-        buttonDb.setOnClickListener { readDb() }
+        buttonDb.apply {
+            setOnClickListener { readDb() }
+            setOnLongClickListener { clearDb(); true }
+        }
         buttonWww.setOnClickListener { readWeb() }
 
         aboveLollipop {
             toast("Running Android above Lollipop") // shorthand for showing Toast
         }
 
-        with(recyclerView){
+        with(recyclerView) {
             layoutManager = LinearLayoutManager(this@MainActivity)
             addItemDecoration(DividerItemDecoration(context, (layoutManager as LinearLayoutManager).orientation))
         }
@@ -58,6 +61,17 @@ class MainActivity : AppCompatActivity() {
             uiThread {
                 // runs on UI thread
                 refreshList(localEvents)
+            }
+        }
+    }
+
+    private fun clearDb() {
+        doAsync {
+            // runs in background
+            DatabaseSingleton.instance.clear()
+            uiThread {
+                // runs on UI thread
+                refreshList(ArrayList<Event>())
             }
         }
     }

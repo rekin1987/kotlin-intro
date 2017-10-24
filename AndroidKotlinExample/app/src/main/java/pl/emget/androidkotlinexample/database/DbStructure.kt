@@ -7,4 +7,6 @@ object EventsTable {
     val TIME = "time" // int
     val DATA = "data" // text
     val TYPE = "type" // text - type of event: 'C' for CinemaEvent, 'T' for TheaterEvent
+    val FREE_SPOTS = "freeSpots" // int
+    val ELEGANT = "elegant" // int (parsed to bool later)
 }
