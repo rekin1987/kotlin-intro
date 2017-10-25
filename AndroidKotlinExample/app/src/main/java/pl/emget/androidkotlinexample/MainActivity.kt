@@ -90,6 +90,7 @@ class MainActivity : AppCompatActivity() {
     private fun refreshList(collection: MutableList<Event>) {
         if (recyclerView.adapter == null) {
             events = collection
+            // recyclerView.adapter = EventsAdapter(events, this::clickedItem) // - same as below
             recyclerView.adapter = EventsAdapter(events) {
                 // on click
                 clickedItem(it) // 'it' inside lambda refers to Event
